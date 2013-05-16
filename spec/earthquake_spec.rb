@@ -51,8 +51,8 @@ describe Earthquake do
         earthquakes = Earthquake.get_earthquakes({ "on" => "1368582600" }) # Wed, 15 May 2013 01:50:00 GMT
         earthquakes.size.should == 2
 
-        earthquakes.map(&:earthquake_id).should include(1, 2)
-        earthquakes.map(&:earthquake_id).should_not include(3)
+        earthquakes.map(&:earthquake_id).should include("1", "2")
+        earthquakes.map(&:earthquake_id).should_not include("3")
       end
 
       it "should ignore the 'on' parameter if it's not a timestamp" do
@@ -66,8 +66,8 @@ describe Earthquake do
         earthquakes = Earthquake.get_earthquakes({ "since" => "1368582600" }) # Wed, 15 May 2013 01:50:00 GMT
         earthquakes.size.should == 2
 
-        earthquakes.map(&:earthquake_id).should include(1, 3)
-        earthquakes.map(&:earthquake_id).should_not include(2)
+        earthquakes.map(&:earthquake_id).should include("1", "3")
+        earthquakes.map(&:earthquake_id).should_not include("2")
       end
 
       it "should ignore the 'since' parameter if it's not a timestamp" do
@@ -81,8 +81,8 @@ describe Earthquake do
         earthquakes = Earthquake.get_earthquakes({ "on" => "1368582600", "since" => "1368582600" }) # Wed, 15 May 2013 01:50:00 GMT
         earthquakes.size.should == 1
 
-        earthquakes.map(&:earthquake_id).should include(1)
-        earthquakes.map(&:earthquake_id).should_not include(2, 3)
+        earthquakes.map(&:earthquake_id).should include("1")
+        earthquakes.map(&:earthquake_id).should_not include("2", "3")
       end
     end
 
@@ -91,8 +91,8 @@ describe Earthquake do
         earthquakes = Earthquake.get_earthquakes({ "over" => "2.0" })
         earthquakes.size.should == 2
 
-        earthquakes.map(&:earthquake_id).should include(2, 3)
-        earthquakes.map(&:earthquake_id).should_not include(1)
+        earthquakes.map(&:earthquake_id).should include("2", "3")
+        earthquakes.map(&:earthquake_id).should_not include("1")
       end
 
       it "should ignore the 'over' parameter if it's not a float between 0.0 and 9.9" do
@@ -106,8 +106,8 @@ describe Earthquake do
         earthquakes = Earthquake.get_earthquakes({ "near" => "35.50,-120.70" })
         earthquakes.size.should == 1
 
-        earthquakes.map(&:earthquake_id).should include(3)
-        earthquakes.map(&:earthquake_id).should_not include(1, 2)
+        earthquakes.map(&:earthquake_id).should include("3")
+        earthquakes.map(&:earthquake_id).should_not include("1", "2")
       end
 
       it "should ignore the 'near' parameter if it's not 'latitude,longitude' formatted properly" do

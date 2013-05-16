@@ -19,12 +19,12 @@ class Earthquake
 
   property :id,            Serial
   property :source,        String
-  property :earthquake_id, Integer
+  property :earthquake_id, String
   property :version,       String
-  property :time_of_quake, DateTime
-  property :latitude,      Float
-  property :longitude,     Float
-  property :magnitude,     Float
+  property :time_of_quake, DateTime, :index => true
+  property :latitude,      Float,    :index => :latlng
+  property :longitude,     Float,    :index => :latlng
+  property :magnitude,     Float,    :index => true
   property :depth,         Float
   property :stations,      Integer
   property :region,        String
@@ -85,7 +85,7 @@ class Earthquake
   def self.parse_api_response(response)
     CSV.parse(response, headers: true) do |row|
       earthquake = Hash[row.map { |k, v| [KEY_MAPPING[k], v] }]
-      [:earthquake_id, :stations].each { |k| earthquake[k] = earthquake[k].to_i }
+      [:stations].each { |k| earthquake[k] = earthquake[k].to_i }
       [:latitude, :longitude, :magnitude, :depth].each { |k| earthquake[k] = earthquake[k].to_f }
 
       if Earthquake.count(:earthquake_id => earthquake[:earthquake_id], :time_of_quake => Time.parse(earthquake[:time_of_quake])) == 0
