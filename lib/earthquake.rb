@@ -71,6 +71,10 @@ class Earthquake
       info = info.all(:longitude.lte => (box[3]), :longitude.gte => box[1])
     end
 
+    if params["limit"] && params["limit"].match(/^[0-9]*$/)
+      info = info.all(:limit => params["limit"].to_i)
+    end
+
     info
   end
 

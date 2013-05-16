@@ -39,6 +39,13 @@ describe Earthquake do
       end
     end
 
+    context "'limit' parameter" do
+      it "limits the number of records returned if the 'limit' parameter exists" do
+        earthquakes = Earthquake.get_earthquakes({ "limit" => "1" })
+        earthquakes.size.should == 1
+      end
+    end
+
     context "'on' parameter" do
       it "returns all earthquakes from a specific date if the 'on' parameter exists" do
         earthquakes = Earthquake.get_earthquakes({ "on" => "1368582600" }) # Wed, 15 May 2013 01:50:00 GMT

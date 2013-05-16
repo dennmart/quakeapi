@@ -37,6 +37,11 @@ describe "quakeapi" do
       earthquakes.size.should == 3
     end
 
+    it "limits the number of records returned if params['limit'] is passed" do
+      get "/earthquakes.json", :limit => "1"
+      earthquakes.size.should == 1
+    end
+
     it "returns all earthquakes from a specific date if params['on'] is passed" do
       get "/earthquakes.json", :on => "1368582600" # Wed, 15 May 2013 01:50:00 GMT
       earthquakes.size.should == 2
