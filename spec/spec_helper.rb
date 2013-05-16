@@ -2,7 +2,8 @@ ENV['RACK_ENV'] = "test"
 
 require "webmock/rspec"
 require "database_cleaner"
-require File.join(File.dirname(__FILE__), "..", "lib", "earthquake")
+require "rack/test"
+require File.join(File.dirname(__FILE__), "..", "quakeapi")
 
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true

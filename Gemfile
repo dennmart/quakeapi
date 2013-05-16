@@ -9,4 +9,5 @@ group :test do
   gem "rspec"
   gem "webmock"
   gem "database_cleaner"
+  gem "rack-test"
 end
