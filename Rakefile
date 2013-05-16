@@ -1,3 +1,4 @@
+require 'rspec/core/rake_task'
 require File.join(File.dirname(__FILE__), "lib", "earthquake")
 
 namespace :quakeapi do
@@ -13,3 +14,6 @@ namespace :quakeapi do
     puts "Finished!"
   end
 end
+
+RSpec::Core::RakeTask.new(:spec)
+task :default => :spec
