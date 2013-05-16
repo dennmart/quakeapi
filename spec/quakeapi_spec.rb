@@ -69,8 +69,12 @@ describe "quakeapi" do
       earthquake_ids.should_not include(1)
     end
 
-    it "returns all earthquakes within a 5 mile radius of latitude and longitude if those parameters are passed" do
-      pending
+    it "returns all earthquakes within a 5 mile radius of latitude and longitude if params['near'] is passed" do
+      get "/earthquakes.json", :near => "35.50,-120.70"
+      earthquakes.size.should == 1
+
+      earthquake_ids.should include(3)
+      earthquake_ids.should_not include(1, 2)
     end
   end
 end

@@ -20,6 +20,13 @@ get "/earthquakes.json" do
     info = info.all(:time_of_quake => (since_time..Time.now.utc))
   end
 
+  if params["near"]
+    lat, lng = params["near"].split(",")
+    box = Geocoder::Calculations.bounding_box([lat, lng], 5)
+    info = info.all(:latitude.lte => (box[2]), :latitude.gte => box[0])
+    info = info.all(:longitude.lte => (box[3]), :longitude.gte => box[1])
+  end
+
   info = info.all(:magnitude.gte => params["over"].to_f) if params["over"]
 
   info.to_json

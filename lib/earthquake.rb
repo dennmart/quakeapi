@@ -1,4 +1,5 @@
 require "data_mapper"
+require "geocoder"
 require "net/http"
 
 class Earthquake

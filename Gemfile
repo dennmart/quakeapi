@@ -4,6 +4,7 @@ gem "rake"
 gem "sinatra"
 gem "data_mapper"
 gem "dm-postgres-adapter"
+gem "geocoder"
 
 group :test do
   gem "rspec"
