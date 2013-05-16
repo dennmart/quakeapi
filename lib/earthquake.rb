@@ -47,13 +47,14 @@ class Earthquake
   private
 
   def self.parse_api_response(response)
-    last_quake_info = self.first(:order => [:time_of_quake.desc])
     CSV.parse(response, headers: true) do |row|
       earthquake = Hash[row.map { |k, v| [KEY_MAPPING[k], v] }]
-      break if earthquake[:earthquake_id].to_i == last_quake_info.earthquake_id unless last_quake_info.nil?
       [:earthquake_id, :stations].each { |k| earthquake[k] = earthquake[k].to_i }
       [:latitude, :longitude, :magnitude, :depth].each { |k| earthquake[k] = earthquake[k].to_f }
-      Earthquake.create(earthquake)
+
+      if Earthquake.count(:earthquake_id => earthquake[:earthquake_id], :time_of_quake => Time.parse(earthquake[:time_of_quake])) == 0
+        Earthquake.create(earthquake)
+      end
     end
   end
 end
