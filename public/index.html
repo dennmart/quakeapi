@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Simple Earthquake API</title>
+    <link rel="stylesheet" type="text/css" href="main.css" />
+  </head>
+
+  <body>
+    <div id="wrapper">
+      <div id="content">
+        <h1>Simple Earthquake API</h1>
+
+        <h2>Just a simple earthquake API, try it out!</h2>
+
+        <p><strong>Get all earthquakes</strong></p>
+        <code>/earthquakes.json</code>
+
+        <p><strong>Get all earthquakes from a single date from a timestamp (Example: '1368582600' => May 15, 2013)</strong></p>
+        <code>/earthquakes.json?on=1368582600</code>
+
+        <p><strong>Get all earthquakes since a specific time from a timestamp (Example: '1368582600' => all since May 15, 2013 at 1:50:00 AM UTC)</strong></p>
+        <code>/earthquakes.json?since=1368582600</code>
+
+        <p><strong>Get all earthquakes over a specific magnitude</strong></p>
+        <code>/earthquakes.json?over=4.5</code>
+
+        <p><strong>Get all earthquakes within a five mile radius of a latitude and longitude (Example: Latitude 35.40, Longitude -120.70)</strong></p>
+        <code>/earthquakes.json?near=35.40,-120.70</code>
+
+        <p><strong>You can limit the number of earthquakes returned by passing a limit</strong></p>
+        <code>/earthquakes.json?limit=10</code>
+
+        <p><strong>You can also combine multiple parameters</strong></p>
+        <code>/earthquakes.json?over=3.0&amp;near=32.67,-121.50</code>
+      </div>
+    </div>
+  </body>
+</html>

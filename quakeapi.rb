@@ -2,7 +2,7 @@ require "sinatra"
 require File.join(File.dirname(__FILE__), "lib", "earthquake")
 
 get "/" do
-  "Earthquake API"
+  File.read(File.join("public", "index.html"))
 end
 
 get "/earthquakes.json" do
