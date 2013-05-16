@@ -75,6 +75,8 @@ class Earthquake
       info = info.all(:limit => params["limit"].to_i)
     end
 
+    info = info.all(:order => [:time_of_quake.desc])
+
     info
   end
 

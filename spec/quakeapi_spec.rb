@@ -8,9 +8,9 @@ describe "quakeapi" do
   end
 
   describe "GET /" do
-    it "should do something more interesting" do
+    it "should returns a valid response" do
       get "/"
-      last_response.body.should == "Earthquake API"
+      last_response.should be_ok
     end
   end
 
