@@ -114,6 +114,11 @@ describe Earthquake do
         earthquakes = Earthquake.get_earthquakes({ "near" => "35.50/-120.70" })
         earthquakes.size.should == 3
       end
+
+      it "uses a specified distance if the 'distance' parameter exists" do
+        Geocoder::Calculations.should_receive(:bounding_box).with(["35.50", "-120.70"], 25).and_call_original
+        Earthquake.get_earthquakes({ "near" => "35.50,-120.70", "distance" => "25" })
+      end
     end
   end
 end

@@ -3,6 +3,7 @@ require "geocoder"
 require "net/http"
 
 class Earthquake
+  NEAR_MILES = 5
   INFO_URL = "http://earthquake.usgs.gov/earthquakes/catalogs/eqs7day-M1.txt"
   KEY_MAPPING =  { "Src"       => :source,
                    "Eqid"      => :earthquake_id,
@@ -66,7 +67,12 @@ class Earthquake
 
     if params["near"] && params["near"].match(/^(\-?\d+(\.\d+)?),\s*(\-?\d+(\.\d+)?)$/)
       lat, lng = params["near"].split(",")
-      box = Geocoder::Calculations.bounding_box([lat, lng], 5)
+      distance = if params["distance"] && params["distance"].match(/^\d*$/)
+                   params["distance"].to_i
+                 else
+                   NEAR_MILES
+                 end
+      box = Geocoder::Calculations.bounding_box([lat, lng], distance)
       info = info.all(:latitude.lte => (box[2]), :latitude.gte => box[0])
       info = info.all(:longitude.lte => (box[3]), :longitude.gte => box[1])
     end
