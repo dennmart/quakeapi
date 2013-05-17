@@ -1,3 +1,6 @@
+[![Build
+Status](https://travis-ci.org/dennmart/quakeapi.png)](https://travis-ci.org/dennmart/quakeapi)
+
 This is just a simple Sinatra app that fetches earthquake information
 from http://earthquake.usgs.gov/earthquakes/catalogs/eqs7day-M1.txt and
 can be fetched through an API.
