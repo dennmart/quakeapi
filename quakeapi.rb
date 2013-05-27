@@ -8,6 +8,6 @@ end
 get "/earthquakes.json" do
   content_type "application/json"
 
-  earthquakes = Earthquake.get_earthquakes(params)
-  earthquakes.to_json
+  earthquake = Earthquake.new
+  earthquake.get_earthquakes(params).to_json
 end

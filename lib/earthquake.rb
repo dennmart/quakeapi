@@ -46,7 +46,7 @@ class Earthquake
     parse_api_response(request.body)
   end
 
-  def self.get_earthquakes(params)
+  def get_earthquakes(params)
     info = Earthquake.all
 
     if params["on"] && params["on"].match(/^\d{10}$/)
